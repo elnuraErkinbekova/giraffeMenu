@@ -1,0 +1,108 @@
+body {
+    position: relative;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #fff8f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url(assets/images/giraffe-horizontal.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0));
+    pointer-events: none;
+    z-index: -1;
+}
+
+h1 {
+    margin: 20px 0;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 3rem;
+}
+
+.categories-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0 40px 40px;
+    box-sizing: border-box;
+    flex-grow: 1;
+    align-items: center;
+    justify-items: center;
+}
+
+.category {
+    width: 90%;
+    aspect-ratio: 1 / 1;
+    background-color: #ffd580;
+    border: none;
+    border-radius: 12px;
+    font-size: 3rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    color: white;
+    text-shadow: 3px 3px black;
+    box-shadow: 10px 10px 15px 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.category:hover {
+    background-color: #ffb347;
+    transform: scale(1.05);
+}
+
+.category img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.category h2 {
+    position: relative;
+    margin: 0;
+    z-index: 1;
+    /* No background, no padding - just plain text like the buttons */
+}
+
+/* --- Mobile view --- */
+@media (max-width: 768px) {
+    .categories-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        gap: 15px;
+        height: calc(100vh - 120px);
+        box-sizing: border-box;
+    }
+
+    .category {
+        width: 95%;
+        max-width: 420px;
+        aspect-ratio: 1.4 / 1;
+        font-size: 2rem;
+    }
+}
