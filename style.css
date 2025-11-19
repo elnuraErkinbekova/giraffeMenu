@@ -1,72 +1,55 @@
+/* ============================
+   Общий фон для всех страниц
+============================ */
 body {
-    position: relative;
     font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #fff8f0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-image: url(assets/images/giraffe-horizontal.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 0;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    text-align: center;
+    background-image: url('assets/images/giraffe-horizontal.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff; /* основной текст белый для контраста */
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 120px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0));
-    pointer-events: none;
-    z-index: -1;
-}
-
+/* Заголовки */
 h1 {
     margin: 20px 0;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
+/* ============================
+   Index.html - категории
+============================ */
 .categories-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 0 40px 40px;
     box-sizing: border-box;
-    flex-grow: 1;
-    align-items: center;
-    justify-items: center;
 }
 
 .category {
     width: 90%;
     aspect-ratio: 1 / 1;
-    background-color: #ffd580;
-    border: none;
+    background-color: rgba(255, 213, 128, 0.8);
     border-radius: 12px;
     font-size: 3rem;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    color: white;
+    color: #fff;
     text-shadow: 3px 3px black;
-    box-shadow: 10px 10px 15px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.5);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
-}
-
-.category:hover {
-    background-color: #ffb347;
-    transform: scale(1.05);
+    transition: transform 0.2s, background-color 0.3s;
 }
 
 .category img {
@@ -83,26 +66,315 @@ h1 {
     position: relative;
     margin: 0;
     z-index: 1;
-    /* No background, no padding - just plain text like the buttons */
 }
 
-/* --- Mobile view --- */
+.category:hover {
+    background-color: rgba(255, 179, 71, 0.8);
+    transform: scale(1.05);
+}
+
+/* Mobile view for index */
 @media (max-width: 768px) {
     .categories-container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
         gap: 15px;
-        height: calc(100vh - 120px);
-        box-sizing: border-box;
+        padding: 20px;
     }
-
     .category {
         width: 95%;
         max-width: 420px;
         aspect-ratio: 1.4 / 1;
         font-size: 2rem;
     }
+}
+
+/* ============================
+   Menu.html - вертикальная версия
+============================ */
+#items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.item {
+    display: flex;
+    background-color: rgba(255, 213, 128, 0.9);
+    border-radius: 12px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    overflow: hidden;
+    align-items: center;
+}
+
+.item img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.item-info {
+    text-align: left;
+    padding: 15px;
+    flex: 1;
+}
+
+.item-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.item-info p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.price {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Mobile view for menu */
+@media (max-width: 768px) {
+    .item {
+        flex-direction: column;
+        text-align: center;
+    }
+    .item img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* ============================
+   Admin.html - админка
+============================ */
+.admin-menu, .add-buttons, .delete-buttons {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.admin-menu button, .add-buttons button, .delete-buttons button {
+    background-color: rgba(255, 213, 128, 0.9);
+    border: none;
+    border-radius: 12px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.admin-menu button:hover, .add-buttons button:hover, .delete-buttons button:hover {
+    background-color: rgba(255, 179, 71, 0.9);
+    transform: scale(1.05);
+}
+
+/* Контейнер для действий и формы */
+.action-section {
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* центрируем дочерние элементы */
+    margin: 0 auto;      /* центрируем блок */
+}
+
+/* Форма добавления/удаления */
+#form-container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: rgba(255,213,128,0.9);
+    border-radius: 12px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Поля формы и кнопки */
+#form-container input,
+#form-container select,
+#form-container button,
+.file-btn {
+    width: 100%;
+    max-width: 500px;
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Скрываем стандартный input для файлов */
+#form-container input[type="file"] {
+    display: none;
+}
+
+/* Кастомная кнопка загрузки файлов */
+.file-upload {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.file-btn {
+    display: inline-block;
+    background-color: rgba(255, 213, 128, 0.9);
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.file-btn:hover {
+    background-color: rgba(255, 179, 71, 0.9);
+    transform: scale(1.05);
+}
+
+/* Mobile view for admin */
+@media (max-width: 768px) {
+    .admin-menu, .add-buttons, .delete-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    #form-container input,
+    #form-container select,
+    #form-container button,
+    .file-btn {
+        font-size: 1rem;
+    }
+}
+/* ============================
+   Навбар для категорий
+============================ */
+.navbar {
+    width: 100%;
+    background-color: rgba(255,213,128,0.9);
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap; /* адаптивно на мобильных */
+}
+
+.navbar li {
+
+}
+
+.navbar a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: rgba(255,179,71,0.9);
+    color: #fff;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+/* Кнопка Sign In в правом верхнем углу navbar */
+.navbar {
+    width: 100%;
+    background-color: rgba(255,213,128,0.9);
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between; /* категории слева, кнопка справа */
+    align-items: center;
+}
+
+.sign-in-btn a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: rgba(255,213,128,0.9);
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.sign-in-btn a:hover {
+    background-color: rgba(255,179,71,0.9);
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* На мобильных экранах */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .sign-in-btn a {
+        width: 100%;
+        text-align: center;
+    }
+}
+#login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    gap: 15px;
+}
+
+#login-container input {
+    padding: 10px;
+    width: 300px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+#login-container button {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: none;
+    background-color: rgba(255,213,128,0.9);
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+#login-container button:hover {
+    background-color: rgba(255,179,71,0.9);
+    transform: scale(1.05);
 }
