@@ -1,6 +1,4 @@
-/* ============================
-   Общий фон для всех страниц
-============================ */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -12,10 +10,10 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    color: #fff; /* основной текст белый для контраста */
+    color: #fff;
 }
 
-/* Заголовки */
+
 h1 {
     margin: 20px 0;
     font-size: 3rem;
@@ -25,9 +23,7 @@ h1 {
 
 }
 
-/* ============================
-   Index.html - категории
-============================ */
+
 .categories-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -77,7 +73,7 @@ h1 {
     transform: scale(1.05);
 }
 
-/* Mobile view for index */
+
 @media (max-width: 768px) {
     .categories-container {
         display: flex;
@@ -93,9 +89,7 @@ h1 {
     }
 }
 
-/* ============================
-   Menu.html - вертикальная версия
-============================ */
+
 #items {
     display: flex;
     flex-direction: column;
@@ -140,7 +134,7 @@ h1 {
     color: #333;
 }
 
-/* Mobile view for menu */
+
 @media (max-width: 768px) {
     .item {
         flex-direction: column;
@@ -152,9 +146,7 @@ h1 {
     }
 }
 
-/* ============================
-   Admin.html - админка
-============================ */
+
 .admin-menu, .add-buttons, .delete-buttons {
     display: flex;
     gap: 20px;
@@ -179,17 +171,17 @@ h1 {
     transform: scale(1.05);
 }
 
-/* Контейнер для действий и формы */
+
 .action-section {
     width: 90%;
     max-width: 600px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* центрируем дочерние элементы */
-    margin: 0 auto;      /* центрируем блок */
+    align-items: center;
+    margin: 0 auto;
 }
 
-/* Форма добавления/удаления */
+
 #form-container {
     width: 100%;
     max-width: 600px;
@@ -203,7 +195,7 @@ h1 {
     box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
 }
 
-/* Поля формы и кнопки */
+
 #form-container input,
 #form-container select,
 #form-container button,
@@ -218,12 +210,12 @@ h1 {
     box-sizing: border-box;
 }
 
-/* Скрываем стандартный input для файлов */
+
 #form-container input[type="file"] {
     display: none;
 }
 
-/* Кастомная кнопка загрузки файлов */
+
 .file-upload {
     text-align: center;
     margin: 10px 0;
@@ -247,7 +239,7 @@ h1 {
     transform: scale(1.05);
 }
 
-/* Mobile view for admin */
+
 @media (max-width: 768px) {
     .admin-menu, .add-buttons, .delete-buttons {
         flex-direction: column;
@@ -260,14 +252,14 @@ h1 {
         font-size: 1rem;
     }
 }
-/* Если на index.html — кнопка языка справа, центр и левый блок скрыты */
+
 body.index-page .nav-left,
 body.index-page .nav-center {
     display: none;
 }
 
 body.index-page .nav-right {
-    margin-left: auto; /* смещаем вправо */
+    margin-left: auto;
 }
 
 .navbar {
@@ -338,7 +330,7 @@ body.index-page .nav-right {
     box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
 }
 
-/* выпадающий список */
+
 .lang-dropdown {
     position: absolute;
     right: 0;
@@ -361,7 +353,7 @@ body.index-page .nav-right {
 }
 .lang-dropdown button:hover { background: rgba(0,0,0,0.05); }
 
-/* Мобильная версия: навбар не переводит ссылки в колонку — они остаются горизонтально */
+
 @media (max-width: 768px) {
     .navbar { padding: 8px 12px; }
     .nav-center { gap: 12px; margin: 0 10px; }
@@ -369,12 +361,10 @@ body.index-page .nav-right {
         font-size: 0.95rem;
         padding: 6px 10px;
     }
-    /* на мобилке кнопка Back остаётся слева (она уже слева) */
-    /* lang-dropdown позиционируем чуть иначе, чтобы не выпадал за экран */
+
     .lang-dropdown { right: 8px; left: auto; }
 }
 
-/* Текстовые тени для заголовков (более красивый shadow) */
 h1, h2, h3 {
     text-shadow: 0 4px 10px rgba(0,0,0,0.45);
 }
