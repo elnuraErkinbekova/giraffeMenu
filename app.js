@@ -1,180 +1,227 @@
 const API_URL = "http://localhost:3000";
 
-const fallbackData = {
-  categories: [
-    { id: "drinks", name_en: "Drinks", name_ru: "Напитки", name_kg: "Сусундуктар", img: "assets/images/drinks-menu.jpg" },
-    { id: "desserts", name_en: "Desserts", name_ru: "Десерты", name_kg: "Десерттер", img: "assets/images/desserts-menu.jpg" },
-    { id: "dishes", name_en: "Dishes", name_ru: "Блюда", name_kg: "Тамактар", img: "assets/images/dishes-menu.jpg" },
-  ],
-  items: {
-    drinks: [
-      { title_en: "Latte", title_ru: "Латте", title_kg: "Латте", description: "Milk coffee", ingredients: "Espresso, milk", price: "150 som", img: "assets/images/latte.jpg" },
-      { title_en: "Cappuccino", title_ru: "Капучино", title_kg: "Капучино", description: "Classic cappuccino", ingredients: "Espresso, steamed milk, foam", price: "140 som", img: "assets/images/cappuccino.jpg" }
-    ],
-    desserts: [
-      { title_en: "Chocolate Cake", title_ru: "Шоколадный торт", title_kg: "Шоколад торт", description: "Rich chocolate cake", ingredients: "Chocolate, flour, eggs", price: "200 som", img: "assets/images/cake.jpg" },
-      { title_en: "Cheesecake", title_ru: "Чизкейк", title_kg: "Чизкейк", description: "Creamy New York cheesecake", ingredients: "Cream cheese, biscuit, berries", price: "220 som", img: "assets/images/cheesecake.jpg" }
-    ],
-    dishes: [
-      { title_en: "Pasta Carbonara", title_ru: "Паста Карбонара", title_kg: "Паста Карбонара", description: "Italian pasta with creamy sauce", ingredients: "Pasta, bacon, eggs, parmesan", price: "250 som", img: "assets/images/pasta.jpg" },
-      { title_en: "Caesar Salad", title_ru: "Салат Цезарь", title_kg: "Цезарь салаты", description: "Fresh Caesar salad with chicken", ingredients: "Lettuce, chicken, croutons, sauce", price: "180 som", img: "assets/images/caesar.jpg" }
-    ]
-  }
+let lang = localStorage.getItem("lang") || "en";
+let categories = [];
+
+const systemMessages = {
+    en: {
+        noItems: "No items available in this category.",
+        loading: "Loading...",
+        menu: "Menu",
+        errorLoading: "Error loading items. Please try again.",
+        priceNotSet: "Price not set",
+        back: "Back"
+    },
+    ru: {
+        noItems: "В этой категории нет доступных товаров.",
+        loading: "Загрузка...",
+        menu: "Меню",
+        errorLoading: "Ошибка загрузки товаров. Пожалуйста, попробуйте снова.",
+        priceNotSet: "Цена не установлена",
+        back: "Назад"
+    },
+    kg: {
+        noItems: "Бул категорияда товар жок.",
+        loading: "Жүктөлүүдө...",
+        menu: "Меню",
+        errorLoading: "Товарларды жүктөөдө ката. Кайра аракет кылыңыз.",
+        priceNotSet: "Баасы белгиленген эмес",
+        back: "Артка"
+    }
 };
 
-let lang = localStorage.getItem("lang") || "en";
+// -------------------- Language & Navigation --------------------
+function setupLanguage() {
+    const langBtn = document.getElementById('lang-btn');
+    const dropdown = document.getElementById('lang-dropdown');
+    const stored = localStorage.getItem('lang') || 'en';
+
+    const labelMap = { en: 'lang', ru: 'язык', kg: 'тил' };
+    if (langBtn) langBtn.textContent = labelMap[stored] || 'lang';
+
+    if (langBtn && dropdown) {
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        document.addEventListener('click', () => { dropdown.style.display = 'none'; });
+
+        document.querySelectorAll('.lang-option').forEach(btn => {
+            btn.addEventListener('click', (ev) => {
+                const newLang = ev.currentTarget.getAttribute('data-lang');
+                switchLanguage(newLang);
+            });
+        });
+    }
+
+    // Translate static page elements
+    translateStaticElements();
+}
+
+function translateStaticElements() {
+    // Translate back button
+    const backBtn = document.querySelector('.back-btn');
+    if (backBtn) {
+        backBtn.textContent = systemMessages[lang].back;
+    }
+
+    // Translate page title if it's not the cafe name
+    const pageTitle = document.querySelector('h1');
+    if (pageTitle && !pageTitle.textContent.includes('Giraffe Café')) {
+        pageTitle.textContent = systemMessages[lang].menu;
+    }
+}
+
+function switchLanguage(newLang) {
+    lang = newLang;
+    localStorage.setItem("lang", newLang);
+    location.reload();
+}
+
+// -------------------- Translation Functions --------------------
 
 
+
+// -------------------- API Functions --------------------
+async function fetchCategories() {
+    try {
+        const response = await fetch(`${API_URL}/categories`);
+        if (!response.ok) throw new Error('Failed to fetch categories');
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        return [];
+    }
+}
+
+async function fetchItemsByCategory(categoryId) {
+    try {
+        const response = await fetch(`${API_URL}/items/${categoryId}?lang=${lang}`);
+        if (!response.ok) throw new Error('Failed to fetch items');
+        const items = await response.json();
+
+        return items;
+    } catch (error) {
+        console.error('Error fetching items:', error);
+        return [];
+    }
+}
+
+// -------------------- Rendering Functions --------------------
 function renderCategories(categories, container) {
-  container.innerHTML = '';
-  categories.forEach(c => {
-    container.innerHTML += `
-      <div class="category" onclick="location.href='menu.html?menu=${c.id}'">
-        <img src="${c.img}" alt="${c[`name_${lang}`]}">
-        <h2>${c[`name_${lang}`]}</h2>
-      </div>
-    `;
-  });
+    container.innerHTML = '';
+    categories.forEach(category => {
+        // Use pre-translated category names (from admin panel)
+        const name = category[`name_${lang}`] || category.name_en || 'Unnamed Category';
+        const imageUrl = category.img ? `${API_URL}${category.img}` : 'assets/images/placeholder.jpg';
+        
+        container.innerHTML += `
+            <div class="category" onclick="location.href='menu.html?category=${category.id}'">
+                <img src="${imageUrl}" alt="${name}" onerror="this.src='assets/images/placeholder.jpg'">
+                <h2 class="category-title">${name}</h2>
+            </div>
+        `;
+    });
 }
 
 function renderItems(items, container) {
-  container.innerHTML = '';
-  if (!items || items.length === 0) {
-    container.innerHTML = `<p class="no-items">No items in this category yet.</p>`;
-    return;
-  }
+    container.innerHTML = '';
+    if (!items || items.length === 0) {
+        container.innerHTML = `<p class="no-items">${systemMessages[lang].noItems}</p>`;
+        return;
+    }
 
-  items.forEach(item => {
-    container.innerHTML += `
-      <div class="item">
-        <img src="${item.img}" alt="${item[`title_${lang}`]}">
-        <div class="item-info">
-          <h3>${item[`title_${lang}`]}</h3>
-          <p class="description">${item.description}</p>
-          <p class="ingredients">${item.ingredients}</p>
-          <p class="price">${item.price}</p>
-        </div>
-      </div>
-    `;
-  });
-}
-
-
-if (document.getElementById("categories")) {
-  const container = document.getElementById("categories");
-  container.innerHTML = "<p>Loading categories...</p>";
-
-  fetch(`${API_URL}/categories`)
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .then(categories => renderCategories(categories, container))
-      .catch(() => renderCategories(fallbackData.categories, container));
-}
-
-
-const params = new URLSearchParams(location.search);
-const menu = params.get("menu");
-
-if (document.getElementById("nav-categories")) {
-  const navContainer = document.getElementById("nav-categories");
-  const categories = fallbackData.categories;
-
-  navContainer.innerHTML = '';
-  categories.forEach(c => {
-    navContainer.innerHTML += `
-            <li><a href="menu.html?menu=${c.id}">${c[`name_${lang}`]}</a></li>
+    items.forEach(item => {
+        // Use pre-translated titles (from admin panel)
+        const title = item[`title_${lang}`] || item.title_en || 'Untitled Item';
+        const description = item.description || '';
+        const ingredients = item.ingredients || '';
+        const imageUrl = item.img ? `${API_URL}${item.img}` : 'assets/images/placeholder.jpg';
+        
+        container.innerHTML += `
+            <div class="item">
+                <img src="${imageUrl}" alt="${title}" onerror="this.src='assets/images/placeholder.jpg'">
+                <div class="item-info">
+                    <h3 class="item-title">${title}</h3>
+                    ${description ? `<p class="description">${description}</p>` : ''}
+                    ${ingredients ? `<p class="ingredients">${ingredients}</p>` : ''}
+                    <p class="price">${item.price || systemMessages[lang].priceNotSet}</p>
+                </div>
+            </div>
         `;
-  });
+    });
 }
 
-if (menu && document.getElementById("items")) {
-  const container = document.getElementById("items");
-  const titleElement = document.getElementById("category-title");
-  titleElement.textContent = "Loading...";
-  container.innerHTML = "<p>Loading menu...</p>";
-
-  let categoryData = fallbackData.categories.find(c => c.id === menu) || { name_en: "Menu", name_ru: "Меню", name_kg: "Меню" };
-  let itemsData = fallbackData.items[menu] || [];
-
-
-  fetch(`${API_URL}/categories/${menu}`)
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .then(cat => { categoryData = cat; })
-      .catch(() => {});
-
-
-  fetch(`${API_URL}/items/${menu}`)
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .then(items => { itemsData = items; })
-      .catch(() => {});
-
-
-  setTimeout(() => {
-    titleElement.textContent = categoryData[`name_${lang}`] || "Menu";
-    renderItems(itemsData, container);
-  }, 100); // 100ms задержка
+function renderNavCategories(categories, container) {
+    if (!container) return;
+    
+    container.innerHTML = '';
+    categories.forEach(category => {
+        // Use pre-translated category names (from admin panel)
+        const name = category[`name_${lang}`] || category.name_en || category.id;
+        const a = document.createElement('a');
+        a.href = `menu.html?category=${category.id}`;
+        a.textContent = name;
+        a.className = 'nav-category-link';
+        a.dataset.category = category.id;
+        container.appendChild(a);
+    });
 }
 
+// -------------------- Page Specific Logic --------------------
 
-function switchLanguage(newLang) {
-  lang = newLang;
-  localStorage.setItem("lang", newLang);
-  location.reload();
+// Index Page - Categories List
+if (document.getElementById("categories")) {
+    const container = document.getElementById("categories");
+    container.innerHTML = `<p>${systemMessages[lang].loading}</p>`;
+
+    fetchCategories().then(cats => {
+        categories = cats;
+        renderCategories(cats, container);
+    });
 }
 
-(function setupNavbarLang() {
-  const langBtn = document.getElementById('lang-btn');
-  const dropdown = document.getElementById('lang-dropdown');
-  const stored = localStorage.getItem('site_lang') || 'en';
+// Menu Page - Items List
+const params = new URLSearchParams(location.search);
+const categoryId = params.get("category");
 
-  const labelMap = { en: 'lang', ru: 'язык', kg: 'тил' };
+if (categoryId && document.getElementById("items")) {
+    const container = document.getElementById("items");
+    const titleElement = document.getElementById("category-title");
+    
+    container.innerHTML = `<p>${systemMessages[lang].loading}</p>`;
+    titleElement.textContent = systemMessages[lang].loading;
 
-  if (langBtn) langBtn.textContent = labelMap[stored] || 'lang';
+    // Load category name and items in parallel
+    Promise.all([fetchCategories(), fetchItemsByCategory(categoryId)])
+        .then(([cats, items]) => {
+            const category = cats.find(c => c.id == categoryId);
+            if (category) {
+                // Use pre-translated category name (from admin panel)
+                const categoryName = category[`name_${lang}`] || category.name_en || systemMessages[lang].menu;
+                titleElement.textContent = categoryName;
+            } else {
+                titleElement.textContent = systemMessages[lang].menu;
+            }
+            renderItems(items, container);
+        })
+        .catch(error => {
+            console.error('Error loading menu:', error);
+            titleElement.textContent = systemMessages[lang].menu;
+            container.innerHTML = `<p class="no-items">${systemMessages[lang].errorLoading}</p>`;
+        });
+}
 
-
-  if (langBtn && dropdown) {
-    langBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+// Navigation center for menu page
+if (document.getElementById("nav-center")) {
+    const navContainer = document.getElementById("nav-center");
+    fetchCategories().then(cats => {
+        renderNavCategories(cats, navContainer);
     });
+}
 
-
-    document.addEventListener('click', () => { dropdown.style.display = 'none'; });
-
-
-    document.querySelectorAll('.lang-option').forEach(btn => {
-      btn.addEventListener('click', (ev) => {
-        const newLang = ev.currentTarget.getAttribute('data-lang');
-        localStorage.setItem('site_lang', newLang);
-
-        langBtn.textContent = labelMap[newLang] || 'lang';
-        dropdown.style.display = 'none';
-
-        if (typeof lang !== 'undefined') {
-          lang = newLang;
-          localStorage.setItem('lang', newLang);
-        }
-
-      });
-    });
-  }
-})();
-
-
-(function fillNavCenterFromAPI() {
-  const navCenter = document.getElementById('nav-center');
-  if (!navCenter) return;
-
-
-  if (typeof fallbackData !== 'undefined' && fallbackData.categories) {
-
-    const currentLang = localStorage.getItem('site_lang') || localStorage.getItem('lang') || 'en';
-    navCenter.innerHTML = ''; // очистка
-    fallbackData.categories.forEach(c => {
-      const a = document.createElement('a');
-      a.href = `menu.html?menu=${c.id}`;
-      a.textContent = c[`name_${currentLang}`] || c.name_en || c.id;
-      a.dataset.menu = c.id;
-      navCenter.appendChild(a);
-    });
-  }
-})();
+// Initialize language on page load
+document.addEventListener('DOMContentLoaded', function() {
+    setupLanguage();
+});

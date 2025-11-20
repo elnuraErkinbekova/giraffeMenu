@@ -1,4 +1,3 @@
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -13,7 +12,7 @@ body {
     color: #fff;
 }
 
-
+/* Заголовки */
 h1 {
     margin: 20px 0;
     font-size: 3rem;
@@ -23,7 +22,9 @@ h1 {
 
 }
 
-
+/* ============================
+   Index.html - категории
+============================ */
 .categories-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -73,7 +74,7 @@ h1 {
     transform: scale(1.05);
 }
 
-
+/* Mobile view for index */
 @media (max-width: 768px) {
     .categories-container {
         display: flex;
@@ -89,7 +90,9 @@ h1 {
     }
 }
 
-
+/* ============================
+   Menu.html - вертикальная версия
+============================ */
 #items {
     display: flex;
     flex-direction: column;
@@ -134,7 +137,7 @@ h1 {
     color: #333;
 }
 
-
+/* Mobile view for menu */
 @media (max-width: 768px) {
     .item {
         flex-direction: column;
@@ -146,7 +149,9 @@ h1 {
     }
 }
 
-
+/* ============================
+   Admin.html - админка
+============================ */
 .admin-menu, .add-buttons, .delete-buttons {
     display: flex;
     gap: 20px;
@@ -171,17 +176,17 @@ h1 {
     transform: scale(1.05);
 }
 
-
+/* Контейнер для действий и формы */
 .action-section {
     width: 90%;
     max-width: 600px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
+    align-items: center; /* центрируем дочерние элементы */
+    margin: 0 auto;      /* центрируем блок */
 }
 
-
+/* Форма добавления/удаления */
 #form-container {
     width: 100%;
     max-width: 600px;
@@ -195,7 +200,7 @@ h1 {
     box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
 }
 
-
+/* Поля формы и кнопки */
 #form-container input,
 #form-container select,
 #form-container button,
@@ -210,12 +215,12 @@ h1 {
     box-sizing: border-box;
 }
 
-
+/* Скрываем стандартный input для файлов */
 #form-container input[type="file"] {
     display: none;
 }
 
-
+/* Кастомная кнопка загрузки файлов */
 .file-upload {
     text-align: center;
     margin: 10px 0;
@@ -239,7 +244,7 @@ h1 {
     transform: scale(1.05);
 }
 
-
+/* Mobile view for admin */
 @media (max-width: 768px) {
     .admin-menu, .add-buttons, .delete-buttons {
         flex-direction: column;
@@ -252,14 +257,14 @@ h1 {
         font-size: 1rem;
     }
 }
-
+/* Если на index.html — кнопка языка справа, центр и левый блок скрыты */
 body.index-page .nav-left,
 body.index-page .nav-center {
     display: none;
 }
 
 body.index-page .nav-right {
-    margin-left: auto;
+    margin-left: auto; /* смещаем вправо */
 }
 
 .navbar {
@@ -330,7 +335,7 @@ body.index-page .nav-right {
     box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
 }
 
-
+/* выпадающий список */
 .lang-dropdown {
     position: absolute;
     right: 0;
@@ -353,7 +358,7 @@ body.index-page .nav-right {
 }
 .lang-dropdown button:hover { background: rgba(0,0,0,0.05); }
 
-
+/* Мобильная версия: навбар не переводит ссылки в колонку — они остаются горизонтально */
 @media (max-width: 768px) {
     .navbar { padding: 8px 12px; }
     .nav-center { gap: 12px; margin: 0 10px; }
@@ -361,10 +366,12 @@ body.index-page .nav-right {
         font-size: 0.95rem;
         padding: 6px 10px;
     }
-
+    /* на мобилке кнопка Back остаётся слева (она уже слева) */
+    /* lang-dropdown позиционируем чуть иначе, чтобы не выпадал за экран */
     .lang-dropdown { right: 8px; left: auto; }
 }
 
+/* Текстовые тени для заголовков (более красивый shadow) */
 h1, h2, h3 {
     text-shadow: 0 4px 10px rgba(0,0,0,0.45);
 }
@@ -429,4 +436,265 @@ h1, h2, h3 {
 #login-container button:hover {
     background-color: rgba(255,179,71,0.9);
     transform: scale(1.05);
+}
+
+/* Better text fitting for translations */
+.nav-center a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.item-info h3 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.description, .ingredients {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.4;
+}
+
+/* Language dropdown improvements */
+.lang-dropdown {
+    min-width: 120px;
+}
+
+.lang-option {
+    white-space: nowrap;
+    text-align: left;
+    padding: 8px 16px;
+}
+
+/* Responsive text sizing */
+@media (max-width: 768px) {
+    .nav-center a {
+        max-width: 100px;
+        font-size: 13px;
+        padding: 6px 8px;
+    }
+    
+    .item-info h3 {
+        font-size: 16px;
+    }
+}
+
+/* ============================
+   Better Text Fitting for Translations
+============================ */
+
+/* Navbar category links - auto-adjust font size */
+.nav-center {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nav-category-link {
+    white-space: nowrap;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: clamp(12px, 2.5vw, 16px); /* Responsive font size */
+    min-width: 80px;
+    max-width: 150px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-category-link:hover {
+    background: rgba(255, 179, 71, 0.9);
+    transform: scale(1.05);
+    color: #fff;
+}
+
+/* Category titles on index page */
+.category-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    padding: 0 10px;
+    line-height: 1.2;
+}
+
+/* Item titles */
+.item-title {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+
+/* Descriptions and ingredients */
+.description, .ingredients {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.4;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    margin: 8px 0;
+}
+
+/* Language button */
+#lang-btn {
+    font-size: clamp(14px, 3vw, 16px);
+    padding: 8px 16px;
+    min-width: 60px;
+}
+
+/* Language dropdown options */
+.lang-option {
+    font-size: clamp(13px, 2.5vw, 15px);
+    padding: 10px 16px;
+    white-space: nowrap;
+}
+
+/* Price */
+.price {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* No items message */
+.no-items {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    text-align: center;
+    padding: 40px 20px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .nav-center {
+        gap: 8px;
+    }
+    
+    .nav-category-link {
+        padding: 6px 12px;
+        min-width: 70px;
+        font-size: 13px;
+    }
+    
+    .categories-container {
+        gap: 15px;
+        padding: 0 20px 20px;
+    }
+    
+    .category {
+        width: 95%;
+        aspect-ratio: 1.4 / 1;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .nav-center {
+        gap: 6px;
+    }
+    
+    .nav-category-link {
+        padding: 5px 10px;
+        min-width: 65px;
+        font-size: 12px;
+    }
+    
+    .category-title {
+        font-size: 1.3rem;
+    }
+    
+    .item-title {
+        font-size: 1.3rem;
+    }
+}
+
+/* ------------------------------
+   MOBILE: HOME PAGE BUTTONS
+-------------------------------- */
+@media (max-width: 768px) {
+
+    .menu-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        width: 92%;
+        margin: 0 auto;
+    }
+
+    .menu-buttons button {
+        width: 100%;
+        height: 95px;                 /* more horizontal */
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 16px;
+        background-color: #ffffffcc;
+        backdrop-filter: blur(3px);
+        border: none;
+    }
+
+    .menu-buttons button img {
+        width: 65px;
+        height: 65px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-right: 16px;
+    }
+
+    .menu-buttons button span {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+    }
+}
+
+/* ---------------------------------
+   MOBILE: MENU PAGE TOP BAR ONLY
+---------------------------------- */
+@media (max-width: 768px) {
+
+    /* Hide category buttons on mobile */
+    .categories-nav {
+        display: none !important;
+    }
+
+    /* Top bar layout for Back + Lang */
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 18px;
+        background-color: #ffffffd9;
+        backdrop-filter: blur(2px);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .back-button,
+    .translate-button {
+        font-size: 18px;
+        font-weight: 600;
+        background: none;
+        border: none;
+        color: #333;
+    }
 }
