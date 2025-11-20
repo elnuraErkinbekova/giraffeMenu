@@ -8,13 +8,21 @@
 </head>
 <body>
 <nav class="navbar">
-    <ul id="nav-categories">
-    </ul>
-    <div class="sign-in-btn">
-        <a href="admin.html">Sign In</a>
+    <div class="nav-left">
+        <a href="index.html" class="back-btn">Back</a>
     </div>
 
+    <div class="nav-center" id="nav-center">
+        <!-- Статические ссылки (ведут на menu.html с нужной категорией) -->
+        <a href="menu.html?menu=drinks">Drinks</a>
+        <a href="menu.html?menu=desserts">Desserts</a>
+        <a href="menu.html?menu=dishes">Dishes</a>
+    </div>
+
+    <div class="nav-right"></div>
 </nav>
+
+
 
 <h1 id="category-title"></h1>
 <div id="items"></div>

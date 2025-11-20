@@ -19,7 +19,10 @@ body {
 h1 {
     margin: 20px 0;
     font-size: 3rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-shadow:
+            3px 3px 8px rgba(0, 0, 0, 0.6),
+            0 0 12px rgba(0, 0, 0, 0.4);
+
 }
 
 /* ============================
@@ -31,6 +34,7 @@ h1 {
     gap: 20px;
     padding: 0 40px 40px;
     box-sizing: border-box;
+    margin-top: 100px;
 }
 
 .category {
@@ -256,67 +260,90 @@ h1 {
         font-size: 1rem;
     }
 }
-/* ============================
-   Навбар для категорий
-============================ */
+/* NAVBAR */
 .navbar {
     width: 100%;
-    background-color: rgba(255,213,128,0.9);
-    padding: 10px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(8px);
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 99;
 }
 
-.navbar ul {
-    list-style: none;
+.nav-left,
+.nav-center,
+.nav-right {
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
-    flex-wrap: wrap; /* адаптивно на мобильных */
+    align-items: center;
 }
 
-.navbar li {
-
+.nav-center {
+    gap: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .navbar a {
     text-decoration: none;
     font-weight: bold;
     color: #333;
-    padding: 8px 16px;
-    border-radius: 8px;
-    transition: background-color 0.3s, color 0.3s;
+    font-size: 1.1rem;
+    transition: 0.2s;
 }
 
 .navbar a:hover {
-    background-color: rgba(255,179,71,0.9);
-    color: #fff;
+    color: #d18b00;
+    transform: scale(1.05);
 }
 
-/* Mobile view */
+/* Back button style */
+.back-btn {
+    padding: 8px 16px;
+    background-color: rgba(255,187,85,0.85);
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.back-btn:hover {
+    background-color: rgba(255,165,0,0.9);
+}
+/* ---- MOBILE NAVBAR ---- */
 @media (max-width: 768px) {
-    .navbar ul {
-        flex-direction: column;
-        gap: 10px;
+
+    .navbar {
+        padding: 12px 15px;
+        justify-content: space-between;
+    }
+
+    /* Back stays left */
+    .nav-left .back-btn {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+
+    /* Center links shrink a little and stay horizontal */
+    .nav-center {
+        gap: 15px; /* меньше расстояние */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .nav-center a {
+        font-size: 0.9rem;
+        padding: 0;
+    }
+
+    /* Right stays empty, for center alignment */
+    .nav-right {
+        width: 20px; /* чтобы центр оставался стабильным */
     }
 }
-/* Кнопка Sign In в правом верхнем углу navbar */
-.navbar {
-    width: 100%;
-    background-color: rgba(255,213,128,0.9);
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between; /* категории слева, кнопка справа */
-    align-items: center;
-}
+
 
 .sign-in-btn a {
     text-decoration: none;
