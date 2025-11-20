@@ -260,88 +260,108 @@ h1 {
         font-size: 1rem;
     }
 }
-/* NAVBAR */
+/* NAVBAR: общие */
 .navbar {
     width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 15px 25px;
-    background: rgba(255,255,255,0.8);
-    backdrop-filter: blur(8px);
+    justify-content: space-between; /* left - center - right */
+    padding: 8px 20px;
+    background-color: rgba(255,213,128,0.95);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
     position: sticky;
     top: 0;
-    z-index: 99;
+    z-index: 1000;
 }
 
-.nav-left,
-.nav-center,
-.nav-right {
-    display: flex;
-    align-items: center;
+/* левый блок (Back) */
+.nav-left { display:flex; align-items:center; }
+.nav-left .back-btn {
+    display:inline-block;
+    text-decoration:none;
+    color:#333;
+    background: rgba(255,255,255,0.9);
+    padding: 6px 12px;
+    border-radius:8px;
+    font-weight:600;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
 }
 
+/* центр — категории */
 .nav-center {
-    gap: 30px;
+    display:flex;
+    gap: 18px;
+    justify-content:center;
+    align-items:center;
+    flex: 1;               /* занимает центр */
+    margin: 0 20px;
+    white-space: nowrap;   /* чтобы ссылки не переносились на мобилке */
+    overflow-x: auto;      /* при нехватке ширины — прокрутка по X */
+    -webkit-overflow-scrolling: touch;
+}
+
+.nav-center a {
+    text-decoration:none;
+    color:#333;
+    font-weight:700;
+    padding: 6px 12px;
+    border-radius:8px;
+    background: rgba(255,255,255,0.85);
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+}
+
+/* правый блок — язык */
+.nav-right { display:flex; align-items:center; }
+.lang-wrap { position: relative; }
+#lang-btn {
+    background: rgba(255,255,255,0.95);
+    border: none;
+    padding: 6px 10px;
+    border-radius:8px;
+    font-weight:700;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+}
+
+/* выпадающий список */
+.lang-dropdown {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 0;
+    top: calc(100% + 8px);
+    background: rgba(255,255,255,0.98);
+    border-radius:8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    display: none; /* показываем/скрываем через JS */
+    flex-direction: column;
+    padding: 8px;
+    min-width: 140px;
 }
+.lang-dropdown button {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-weight:600;
+}
+.lang-dropdown button:hover { background: rgba(0,0,0,0.05); }
 
-.navbar a {
-    text-decoration: none;
-    font-weight: bold;
-    color: #333;
-    font-size: 1.1rem;
-    transition: 0.2s;
-}
-
-.navbar a:hover {
-    color: #d18b00;
-    transform: scale(1.05);
-}
-
-/* Back button style */
-.back-btn {
-    padding: 8px 16px;
-    background-color: rgba(255,187,85,0.85);
-    border-radius: 8px;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-}
-
-.back-btn:hover {
-    background-color: rgba(255,165,0,0.9);
-}
-/* ---- MOBILE NAVBAR ---- */
+/* Мобильная версия: навбар не переводит ссылки в колонку — они остаются горизонтально */
 @media (max-width: 768px) {
-
-    .navbar {
-        padding: 12px 15px;
-        justify-content: space-between;
-    }
-
-    /* Back stays left */
+    .navbar { padding: 8px 12px; }
+    .nav-center { gap: 12px; margin: 0 10px; }
     .nav-left .back-btn {
-        font-size: 0.9rem;
-        padding: 6px 12px;
+        font-size: 0.95rem;
+        padding: 6px 10px;
     }
+    /* на мобилке кнопка Back остаётся слева (она уже слева) */
+    /* lang-dropdown позиционируем чуть иначе, чтобы не выпадал за экран */
+    .lang-dropdown { right: 8px; left: auto; }
+}
 
-    /* Center links shrink a little and stay horizontal */
-    .nav-center {
-        gap: 15px; /* меньше расстояние */
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .nav-center a {
-        font-size: 0.9rem;
-        padding: 0;
-    }
-
-    /* Right stays empty, for center alignment */
-    .nav-right {
-        width: 20px; /* чтобы центр оставался стабильным */
-    }
+/* Текстовые тени для заголовков (более красивый shadow) */
+h1, h2, h3 {
+    text-shadow: 0 4px 10px rgba(0,0,0,0.45);
 }
 
 

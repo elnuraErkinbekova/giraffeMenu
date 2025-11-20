@@ -13,14 +13,24 @@
     </div>
 
     <div class="nav-center" id="nav-center">
-        <!-- Статические ссылки (ведут на menu.html с нужной категорией) -->
-        <a href="menu.html?menu=drinks">Drinks</a>
-        <a href="menu.html?menu=desserts">Desserts</a>
-        <a href="menu.html?menu=dishes">Dishes</a>
+        <!-- Ссылки можно оставить статически или заполнить JS -->
+        <a href="menu.html?menu=drinks" data-menu="drinks">Drinks</a>
+        <a href="menu.html?menu=desserts" data-menu="desserts">Desserts</a>
+        <a href="menu.html?menu=dishes" data-menu="dishes">Dishes</a>
     </div>
 
-    <div class="nav-right"></div>
+    <div class="nav-right">
+        <div class="lang-wrap">
+            <button id="lang-btn">lang</button>
+            <div id="lang-dropdown" class="lang-dropdown" aria-hidden="true">
+                <button class="lang-option" data-lang="en">English</button>
+                <button class="lang-option" data-lang="ru">Русский</button>
+                <button class="lang-option" data-lang="kg">Кыргызча</button>
+            </div>
+        </div>
+    </div>
 </nav>
+
 
 
 

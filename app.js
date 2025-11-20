@@ -120,3 +120,62 @@ function switchLanguage(newLang) {
   localStorage.setItem("lang", newLang);
   location.reload();
 }
+// ——— NAVBAR: language dropdown, label change, persist ———
+(function setupNavbarLang() {
+  const langBtn = document.getElementById('lang-btn');
+  const dropdown = document.getElementById('lang-dropdown');
+  const stored = localStorage.getItem('site_lang') || 'en';
+
+  const labelMap = { en: 'lang', ru: 'язык', kg: 'тил' };
+  // Отрисовать текущую надпись
+  if (langBtn) langBtn.textContent = labelMap[stored] || 'lang';
+
+  // toggle dropdown
+  if (langBtn && dropdown) {
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // закрыть по клику вне
+    document.addEventListener('click', () => { dropdown.style.display = 'none'; });
+
+    // кнопки опций
+    document.querySelectorAll('.lang-option').forEach(btn => {
+      btn.addEventListener('click', (ev) => {
+        const newLang = ev.currentTarget.getAttribute('data-lang');
+        localStorage.setItem('site_lang', newLang);
+        // изменить текст кнопки
+        langBtn.textContent = labelMap[newLang] || 'lang';
+        dropdown.style.display = 'none';
+        // обновить глобальную переменную lang если используешь её
+        if (typeof lang !== 'undefined') {
+          lang = newLang;
+          localStorage.setItem('lang', newLang); // совместимость с app.js
+        }
+        // Перерендер (если нужно) — например перезагрузить страницу для применения
+        // location.reload();
+      });
+    });
+  }
+})();
+
+// ——— Навигация: если хочешь, чтобы центр заполнялся динамически по API — пример ———
+(function fillNavCenterFromAPI() {
+  const navCenter = document.getElementById('nav-center');
+  if (!navCenter) return;
+
+  // Если у тебя API есть, можешь заменить fetch; пока используем fallbackData или статические
+  if (typeof fallbackData !== 'undefined' && fallbackData.categories) {
+    // очистим и вставим (поддерживает названия на выбранном языке)
+    const currentLang = localStorage.getItem('site_lang') || localStorage.getItem('lang') || 'en';
+    navCenter.innerHTML = ''; // очистка
+    fallbackData.categories.forEach(c => {
+      const a = document.createElement('a');
+      a.href = `menu.html?menu=${c.id}`;
+      a.textContent = c[`name_${currentLang}`] || c.name_en || c.id;
+      a.dataset.menu = c.id;
+      navCenter.appendChild(a);
+    });
+  }
+})();
