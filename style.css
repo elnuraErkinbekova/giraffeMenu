@@ -260,58 +260,73 @@ h1 {
         font-size: 1rem;
     }
 }
-/* NAVBAR: общие */
+/* Если на index.html — кнопка языка справа, центр и левый блок скрыты */
+body.index-page .nav-left,
+body.index-page .nav-center {
+    display: none;
+}
+
+body.index-page .nav-right {
+    margin-left: auto; /* смещаем вправо */
+}
+
 .navbar {
     width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: space-between; /* left - center - right */
-    padding: 8px 20px;
-    background-color: rgba(255,213,128,0.95);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    background-color: rgba(255,213,128,0.9);
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-/* левый блок (Back) */
-.nav-left { display:flex; align-items:center; }
-.nav-left .back-btn {
-    display:inline-block;
-    text-decoration:none;
-    color:#333;
-    background: rgba(255,255,255,0.9);
+.nav-left a, .nav-center a, .nav-right button {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
     padding: 6px 12px;
-    border-radius:8px;
-    font-weight:600;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-/* центр — категории */
+.nav-left a:hover, .nav-center a:hover, .nav-right button:hover {
+    background-color: rgba(255,179,71,0.9);
+    color: #fff;
+    transform: scale(1.05);
+}
+
 .nav-center {
-    display:flex;
-    gap: 18px;
-    justify-content:center;
-    align-items:center;
-    flex: 1;               /* занимает центр */
-    margin: 0 20px;
-    white-space: nowrap;   /* чтобы ссылки не переносились на мобилке */
-    overflow-x: auto;      /* при нехватке ширины — прокрутка по X */
-    -webkit-overflow-scrolling: touch;
+    display: flex;
+    gap: 20px;
 }
 
-.nav-center a {
-    text-decoration:none;
-    color:#333;
-    font-weight:700;
-    padding: 6px 12px;
-    border-radius:8px;
-    background: rgba(255,255,255,0.85);
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+.nav-right {
+    position: relative;
 }
 
-/* правый блок — язык */
-.nav-right { display:flex; align-items:center; }
+.lang-options {
+    display: none;
+    position: absolute;
+    top: 35px;
+    right: 0;
+    background-color: rgba(255,213,128,0.9);
+    border-radius: 8px;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+}
+
+.lang-options button {
+    width: 100%;
+    background-color: rgba(255,213,128,0.9);
+    border: none;
+    cursor: pointer;
+}
+
 .lang-wrap { position: relative; }
 #lang-btn {
     background: rgba(255,255,255,0.95);
