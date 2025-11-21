@@ -698,3 +698,141 @@ h1, h2, h3 {
         color: #333;
     }
 }
+
+/* ============================
+   MOBILE VERSION ENHANCEMENTS
+   для menu.html
+============================ */
+
+@media (max-width: 768px) {
+    /* Скрываем категории в навбаре на мобильных */
+    .nav-center {
+        display: none !important;
+    }
+
+    /* Настраиваем навбар для мобильной версии */
+    .navbar {
+        padding: 10px 15px !important;
+        justify-content: space-between !important;
+    }
+
+    /* Позиционируем кнопку языка - правая сторона, но не самый край */
+    .nav-right {
+        margin-left: auto !important;
+        margin-right: 20px !important; /* Отступ от правого края */
+        transform: none !important;
+    }
+
+    /* Убираем абсолютное позиционирование для выпадающего списка */
+    .lang-dropdown {
+        position: fixed !important;
+        top: 50px !important;
+        right: 20px !important;
+        left: auto !important;
+        z-index: 1001 !important;
+    }
+
+    /* Горизонтальное отображение позиций на мобильных */
+    .item {
+        flex-direction: row !important;
+        text-align: left !important;
+        padding: 15px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .item img {
+        width: 120px !important;
+        height: 100px !important;
+        margin-right: 15px !important;
+        margin-bottom: 0 !important;
+        flex-shrink: 0 !important;
+        object-fit: cover !important;
+    }
+
+    .item-info {
+        flex: 1 !important;
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    .item-title {
+        text-align: left !important;
+        margin-bottom: 8px !important;
+    }
+
+    .description, .ingredients {
+        text-align: left !important;
+        margin-bottom: 8px !important;
+    }
+
+    .price {
+        text-align: left !important;
+        margin-top: 10px !important;
+    }
+
+    /* Заголовок категории */
+    #category-title {
+        font-size: 2rem !important;
+        margin: 15px 0 !important;
+        padding: 0 15px !important;
+    }
+
+    /* Контейнер для items */
+    #items {
+        padding: 10px 15px !important;
+        gap: 15px !important;
+    }
+}
+
+/* Дополнительные стили для очень маленьких экранов */
+@media (max-width: 480px) {
+    .item img {
+        width: 100px !important;
+        height: 80px !important;
+    }
+
+    .nav-right {
+        margin-right: 15px !important; /* Меньший отступ на маленьких экранах */
+    }
+
+    .navbar {
+        padding: 8px 12px !important;
+    }
+
+    #category-title {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* ============================
+   DESKTOP VERSION - кнопка языка не прилипает к краю
+============================ */
+@media (min-width: 769px) {
+    .nav-center {
+        display: flex !important;
+    }
+
+    .nav-right {
+        margin-left: auto !important;
+        margin-right: 30px !important; /* Отступ от правого края на десктопе */
+        transform: none !important;
+    }
+
+    .item {
+        flex-direction: row !important;
+    }
+}
+
+/* Базовые стили для кнопки языка (общие для всех версий) */
+.nav-right {
+    position: relative;
+}
+
+/* Плавные переходы */
+.item {
+    transition: all 0.3s ease !important;
+}
+
+.navbar {
+    transition: all 0.3s ease !important;
+}
