@@ -714,12 +714,31 @@ h1, h2, h3 {
     .navbar {
         padding: 10px 15px !important;
         justify-content: space-between !important;
+        align-items: center !important;
     }
 
-    /* Позиционируем кнопку языка - правая сторона, но не самый край */
+    /* Кнопка назад - слева, с отступом */
+    .nav-left {
+        margin-right: auto !important;
+        margin-left: 10px !important;
+    }
+
+    .back-btn {
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        padding: 8px 16px !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        border-radius: 8px !important;
+        text-decoration: none !important;
+        color: #333 !important;
+        display: inline-block !important;
+        box-shadow: 2px 2px 6px rgba(0,0,0,0.2) !important;
+    }
+
+    /* Кнопка языка - справа, с отступом */
     .nav-right {
         margin-left: auto !important;
-        margin-right: 20px !important; /* Отступ от правого края */
+        margin-right: 10px !important;
         transform: none !important;
     }
 
@@ -791,12 +810,21 @@ h1, h2, h3 {
         height: 80px !important;
     }
 
+    .nav-left {
+        margin-left: 5px !important;
+    }
+
     .nav-right {
-        margin-right: 15px !important; /* Меньший отступ на маленьких экранах */
+        margin-right: 5px !important;
+    }
+
+    .back-btn {
+        padding: 6px 12px !important;
+        font-size: 14px !important;
     }
 
     .navbar {
-        padding: 8px 12px !important;
+        padding: 8px 10px !important;
     }
 
     #category-title {
@@ -816,6 +844,10 @@ h1, h2, h3 {
         margin-left: auto !important;
         margin-right: 30px !important; /* Отступ от правого края на десктопе */
         transform: none !important;
+    }
+
+    .nav-left {
+        margin-left: 20px !important; /* Отступ для кнопки назад на десктопе */
     }
 
     .item {
