@@ -12,7 +12,7 @@ body {
     color: #fff;
 }
 
-/* Заголовки */
+/* Ð—Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ¸ */
 h1 {
     margin: 20px 0;
     font-size: 3rem;
@@ -23,7 +23,7 @@ h1 {
 }
 
 /* ============================
-   Index.html - категории
+   Index.html - ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸
 ============================ */
 .categories-container {
     display: grid;
@@ -91,7 +91,7 @@ h1 {
 }
 
 /* ============================
-   Menu.html - вертикальная версия
+   Menu.html - Ð²ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒÐ½Ð°Ñ Ð²ÐµÑ€ÑÐ¸Ñ
 ============================ */
 #items {
     display: flex;
@@ -150,7 +150,7 @@ h1 {
 }
 
 /* ============================
-   Admin.html - админка
+   Admin.html - Ð°Ð´Ð¼Ð¸Ð½ÐºÐ°
 ============================ */
 .admin-menu, .add-buttons, .delete-buttons {
     display: flex;
@@ -176,17 +176,17 @@ h1 {
     transform: scale(1.05);
 }
 
-/* Контейнер для действий и формы */
+/* ÐšÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€ Ð´Ð»Ñ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ð¹ Ð¸ Ñ„Ð¾Ñ€Ð¼Ñ‹ */
 .action-section {
     width: 90%;
     max-width: 600px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* центрируем дочерние элементы */
-    margin: 0 auto;      /* центрируем блок */
+    align-items: center; /* Ñ†ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÐµÐ¼ Ð´Ð¾Ñ‡ÐµÑ€Ð½Ð¸Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ */
+    margin: 0 auto;      /* Ñ†ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÐµÐ¼ Ð±Ð»Ð¾Ðº */
 }
 
-/* Форма добавления/удаления */
+/* Ð¤Ð¾Ñ€Ð¼Ð° Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ/ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ñ */
 #form-container {
     width: 100%;
     max-width: 600px;
@@ -200,7 +200,7 @@ h1 {
     box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
 }
 
-/* Поля формы и кнопки */
+/* ÐŸÐ¾Ð»Ñ Ñ„Ð¾Ñ€Ð¼Ñ‹ Ð¸ ÐºÐ½Ð¾Ð¿ÐºÐ¸ */
 #form-container input,
 #form-container select,
 #form-container button,
@@ -215,12 +215,12 @@ h1 {
     box-sizing: border-box;
 }
 
-/* Скрываем стандартный input для файлов */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ ÑÑ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚Ð½Ñ‹Ð¹ input Ð´Ð»Ñ Ñ„Ð°Ð¹Ð»Ð¾Ð² */
 #form-container input[type="file"] {
     display: none;
 }
 
-/* Кастомная кнопка загрузки файлов */
+/* ÐšÐ°ÑÑ‚Ð¾Ð¼Ð½Ð°Ñ ÐºÐ½Ð¾Ð¿ÐºÐ° Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Ñ„Ð°Ð¹Ð»Ð¾Ð² */
 .file-upload {
     text-align: center;
     margin: 10px 0;
@@ -257,14 +257,14 @@ h1 {
         font-size: 1rem;
     }
 }
-/* Если на index.html — кнопка языка справа, центр и левый блок скрыты */
+/* Ð•ÑÐ»Ð¸ Ð½Ð° index.html â€” ÐºÐ½Ð¾Ð¿ÐºÐ° ÑÐ·Ñ‹ÐºÐ° ÑÐ¿Ñ€Ð°Ð²Ð°, Ñ†ÐµÐ½Ñ‚Ñ€ Ð¸ Ð»ÐµÐ²Ñ‹Ð¹ Ð±Ð»Ð¾Ðº ÑÐºÑ€Ñ‹Ñ‚Ñ‹ */
 body.index-page .nav-left,
 body.index-page .nav-center {
     display: none;
 }
 
 body.index-page .nav-right {
-    margin-left: auto; /* смещаем вправо */
+    margin-left: auto; /* ÑÐ¼ÐµÑ‰Ð°ÐµÐ¼ Ð²Ð¿Ñ€Ð°Ð²Ð¾ */
 }
 
 .navbar {
@@ -335,7 +335,7 @@ body.index-page .nav-right {
     box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
 }
 
-/* выпадающий список */
+/* Ð²Ñ‹Ð¿Ð°Ð´Ð°ÑŽÑ‰Ð¸Ð¹ ÑÐ¿Ð¸ÑÐ¾Ðº */
 .lang-dropdown {
     position: absolute;
     right: 0;
@@ -343,7 +343,7 @@ body.index-page .nav-right {
     background: rgba(255,255,255,0.98);
     border-radius:8px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    display: none; /* показываем/скрываем через JS */
+    display: none; /* Ð¿Ð¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÐµÐ¼/ÑÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ Ñ‡ÐµÑ€ÐµÐ· JS */
     flex-direction: column;
     padding: 8px;
     min-width: 140px;
@@ -358,7 +358,7 @@ body.index-page .nav-right {
 }
 .lang-dropdown button:hover { background: rgba(0,0,0,0.05); }
 
-/* Мобильная версия: навбар не переводит ссылки в колонку — они остаются горизонтально */
+/* ÐœÐ¾Ð±Ð¸Ð»ÑŒÐ½Ð°Ñ Ð²ÐµÑ€ÑÐ¸Ñ: Ð½Ð°Ð²Ð±Ð°Ñ€ Ð½Ðµ Ð¿ÐµÑ€ÐµÐ²Ð¾Ð´Ð¸Ñ‚ ÑÑÑ‹Ð»ÐºÐ¸ Ð² ÐºÐ¾Ð»Ð¾Ð½ÐºÑƒ â€” Ð¾Ð½Ð¸ Ð¾ÑÑ‚Ð°ÑŽÑ‚ÑÑ Ð³Ð¾Ñ€Ð¸Ð·Ð¾Ð½Ñ‚Ð°Ð»ÑŒÐ½Ð¾ */
 @media (max-width: 768px) {
     .navbar { padding: 8px 12px; }
     .nav-center { gap: 12px; margin: 0 10px; }
@@ -366,12 +366,12 @@ body.index-page .nav-right {
         font-size: 0.95rem;
         padding: 6px 10px;
     }
-    /* на мобилке кнопка Back остаётся слева (она уже слева) */
-    /* lang-dropdown позиционируем чуть иначе, чтобы не выпадал за экран */
+    /* Ð½Ð° Ð¼Ð¾Ð±Ð¸Ð»ÐºÐµ ÐºÐ½Ð¾Ð¿ÐºÐ° Back Ð¾ÑÑ‚Ð°Ñ‘Ñ‚ÑÑ ÑÐ»ÐµÐ²Ð° (Ð¾Ð½Ð° ÑƒÐ¶Ðµ ÑÐ»ÐµÐ²Ð°) */
+    /* lang-dropdown Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¾Ð½Ð¸Ñ€ÑƒÐµÐ¼ Ñ‡ÑƒÑ‚ÑŒ Ð¸Ð½Ð°Ñ‡Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð½Ðµ Ð²Ñ‹Ð¿Ð°Ð´Ð°Ð» Ð·Ð° ÑÐºÑ€Ð°Ð½ */
     .lang-dropdown { right: 8px; left: auto; }
 }
 
-/* Текстовые тени для заголовков (более красивый shadow) */
+/* Ð¢ÐµÐºÑÑ‚Ð¾Ð²Ñ‹Ðµ Ñ‚ÐµÐ½Ð¸ Ð´Ð»Ñ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ¾Ð² (Ð±Ð¾Ð»ÐµÐµ ÐºÑ€Ð°ÑÐ¸Ð²Ñ‹Ð¹ shadow) */
 h1, h2, h3 {
     text-shadow: 0 4px 10px rgba(0,0,0,0.45);
 }
@@ -394,7 +394,7 @@ h1, h2, h3 {
     transform: scale(1.05);
 }
 
-/* На мобильных экранах */
+/* ÐÐ° Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ñ… ÑÐºÑ€Ð°Ð½Ð°Ñ… */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -701,16 +701,16 @@ h1, h2, h3 {
 
 /* ============================
    MOBILE VERSION ENHANCEMENTS
-   для menu.html
+   Ð´Ð»Ñ menu.html
 ============================ */
 
 @media (max-width: 768px) {
-    /* Скрываем категории в навбаре на мобильных */
+    /* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸ Ð² Ð½Ð°Ð²Ð±Ð°Ñ€Ðµ Ð½Ð° Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ñ… */
     .nav-center {
         display: none !important;
     }
 
-    /* Настраиваем навбар для мобильной версии */
+    /* ÐÐ°ÑÑ‚Ñ€Ð°Ð¸Ð²Ð°ÐµÐ¼ Ð½Ð°Ð²Ð±Ð°Ñ€ Ð´Ð»Ñ Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ð¾Ð¹ Ð²ÐµÑ€ÑÐ¸Ð¸ */
     .navbar {
         padding: 10px 15px !important;
         justify-content: space-between !important;
@@ -742,7 +742,7 @@ h1, h2, h3 {
         transform: none !important;
     }
 
-    /* Убираем абсолютное позиционирование для выпадающего списка */
+    /* Ð£Ð±Ð¸Ñ€Ð°ÐµÐ¼ Ð°Ð±ÑÐ¾Ð»ÑŽÑ‚Ð½Ð¾Ðµ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¾Ð½Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð´Ð»Ñ Ð²Ñ‹Ð¿Ð°Ð´Ð°ÑŽÑ‰ÐµÐ³Ð¾ ÑÐ¿Ð¸ÑÐºÐ° */
     .lang-dropdown {
         position: fixed !important;
         top: 50px !important;
@@ -751,7 +751,7 @@ h1, h2, h3 {
         z-index: 1001 !important;
     }
 
-    /* Горизонтальное отображение позиций на мобильных */
+    /* Ð“Ð¾Ñ€Ð¸Ð·Ð¾Ð½Ñ‚Ð°Ð»ÑŒÐ½Ð¾Ðµ Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¹ Ð½Ð° Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ñ… */
     .item {
         flex-direction: row !important;
         text-align: left !important;
@@ -789,21 +789,21 @@ h1, h2, h3 {
         margin-top: 10px !important;
     }
 
-    /* Заголовок категории */
+    /* Ð—Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸ */
     #category-title {
         font-size: 2rem !important;
         margin: 15px 0 !important;
         padding: 0 15px !important;
     }
 
-    /* Контейнер для items */
+    /* ÐšÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€ Ð´Ð»Ñ items */
     #items {
         padding: 10px 15px !important;
         gap: 15px !important;
     }
 }
 
-/* Дополнительные стили для очень маленьких экранов */
+/* Ð”Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ ÑÑ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð¾Ñ‡ÐµÐ½ÑŒ Ð¼Ð°Ð»ÐµÐ½ÑŒÐºÐ¸Ñ… ÑÐºÑ€Ð°Ð½Ð¾Ð² */
 @media (max-width: 480px) {
     .item img {
         width: 100px !important;
@@ -833,7 +833,7 @@ h1, h2, h3 {
 }
 
 /* ============================
-   DESKTOP VERSION - кнопка языка не прилипает к краю
+   DESKTOP VERSION - ÐºÐ½Ð¾Ð¿ÐºÐ° ÑÐ·Ñ‹ÐºÐ° Ð½Ðµ Ð¿Ñ€Ð¸Ð»Ð¸Ð¿Ð°ÐµÑ‚ Ðº ÐºÑ€Ð°ÑŽ
 ============================ */
 @media (min-width: 769px) {
     .nav-center {
@@ -842,7 +842,7 @@ h1, h2, h3 {
 
     .nav-right {
         margin-left: auto !important;
-        margin-right: 30px !important; /* Отступ от правого края на десктопе */
+        margin-right: 30px !important; /* ÐžÑ‚ÑÑ‚ÑƒÐ¿ Ð¾Ñ‚ Ð¿Ñ€Ð°Ð²Ð¾Ð³Ð¾ ÐºÑ€Ð°Ñ Ð½Ð° Ð´ÐµÑÐºÑ‚Ð¾Ð¿Ðµ */
         transform: none !important;
     }
 
@@ -855,12 +855,12 @@ h1, h2, h3 {
     }
 }
 
-/* Базовые стили для кнопки языка (общие для всех версий) */
+/* Ð‘Ð°Ð·Ð¾Ð²Ñ‹Ðµ ÑÑ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ ÐºÐ½Ð¾Ð¿ÐºÐ¸ ÑÐ·Ñ‹ÐºÐ° (Ð¾Ð±Ñ‰Ð¸Ðµ Ð´Ð»Ñ Ð²ÑÐµÑ… Ð²ÐµÑ€ÑÐ¸Ð¹) */
 .nav-right {
     position: relative;
 }
 
-/* Плавные переходы */
+/* ÐŸÐ»Ð°Ð²Ð½Ñ‹Ðµ Ð¿ÐµÑ€ÐµÑ…Ð¾Ð´Ñ‹ */
 .item {
     transition: all 0.3s ease !important;
 }
@@ -868,3 +868,4 @@ h1, h2, h3 {
 .navbar {
     transition: all 0.3s ease !important;
 }
+

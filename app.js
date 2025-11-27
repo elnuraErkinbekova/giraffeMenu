@@ -1,6 +1,12 @@
 const API_URL = "http://localhost:3000";
 
 let lang = localStorage.getItem("lang") || "en";
+
+if (!["en", "ru", "ky"].includes(lang)) {
+    lang = "en";
+    localStorage.setItem("lang", "en");
+}
+
 let categories = [];
 
 const systemMessages = {
@@ -20,7 +26,7 @@ const systemMessages = {
         priceNotSet: "Цена не установлена",
         back: "Назад"
     },
-    kg: {
+    ky: {
         noItems: "Бул категорияда товар жок.",
         loading: "Жүктөлүүдө...",
         menu: "Меню",
@@ -30,14 +36,19 @@ const systemMessages = {
     }
 };
 
+// -------------------- Helper Functions --------------------
+function getCurrentCategoryId() {
+    const params = new URLSearchParams(location.search);
+    return params.get("category");
+}
+
 // -------------------- Language & Navigation --------------------
 function setupLanguage() {
     const langBtn = document.getElementById('lang-btn');
     const dropdown = document.getElementById('lang-dropdown');
     const stored = localStorage.getItem('lang') || 'en';
 
-    const labelMap = { en: 'lang', ru: 'язык', kg: 'тил' };
-    if (langBtn) langBtn.textContent = labelMap[stored] || 'lang';
+    updateLanguageButtonText(langBtn, stored);
 
     if (langBtn && dropdown) {
         langBtn.addEventListener('click', (e) => {
@@ -55,8 +66,13 @@ function setupLanguage() {
         });
     }
 
-    // Translate static page elements
     translateStaticElements();
+}
+
+function updateLanguageButtonText(button, language) {
+    if (!button) return;
+    const labelMap = { en: 'lang', ru: 'язык', ky: 'тил' };
+    button.textContent = labelMap[language] || 'lang';
 }
 
 function translateStaticElements() {
@@ -76,12 +92,16 @@ function translateStaticElements() {
 function switchLanguage(newLang) {
     lang = newLang;
     localStorage.setItem("lang", newLang);
-    location.reload();
+    
+    const currentCategoryId = getCurrentCategoryId();
+    
+    // Check if we're on the menu page and have a category
+    if (currentCategoryId && location.pathname.includes('menu.html')) {
+        location.href = `menu.html?category=${currentCategoryId}&lang=${newLang}`;
+    } else {
+        location.reload();
+    }
 }
-
-// -------------------- Translation Functions --------------------
-
-
 
 // -------------------- API Functions --------------------
 async function fetchCategories() {
@@ -117,7 +137,7 @@ function renderCategories(categories, container) {
         const imageUrl = category.img ? `${API_URL}${category.img}` : 'assets/images/placeholder.jpg';
         
         container.innerHTML += `
-            <div class="category" onclick="location.href='menu.html?category=${category.id}'">
+            <div class="category" onclick="location.href='menu.html?category=${category.id}&lang=${lang}'">
                 <img src="${imageUrl}" alt="${name}" onerror="this.src='assets/images/placeholder.jpg'">
                 <h2 class="category-title">${name}</h2>
             </div>
@@ -134,9 +154,10 @@ function renderItems(items, container) {
 
     items.forEach(item => {
         // Use pre-translated titles (from admin panel)
-        const title = item[`title_${lang}`] || item.title_en || 'Untitled Item';
+        const title = item.title || 'Untitled Item';
         const description = item.description || '';
         const ingredients = item.ingredients || '';
+        const price = item.price || systemMessages[lang].priceNotSet;
         const imageUrl = item.img ? `${API_URL}${item.img}` : 'assets/images/placeholder.jpg';
         
         container.innerHTML += `
@@ -146,7 +167,7 @@ function renderItems(items, container) {
                     <h3 class="item-title">${title}</h3>
                     ${description ? `<p class="description">${description}</p>` : ''}
                     ${ingredients ? `<p class="ingredients">${ingredients}</p>` : ''}
-                    <p class="price">${item.price || systemMessages[lang].priceNotSet}</p>
+                    <p class="price">${price}</p>
                 </div>
             </div>
         `;
@@ -183,8 +204,7 @@ if (document.getElementById("categories")) {
 }
 
 // Menu Page - Items List
-const params = new URLSearchParams(location.search);
-const categoryId = params.get("category");
+const categoryId = getCurrentCategoryId();
 
 if (categoryId && document.getElementById("items")) {
     const container = document.getElementById("items");
