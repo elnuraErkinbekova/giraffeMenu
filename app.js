@@ -92,9 +92,9 @@ function translateStaticElements() {
 function switchLanguage(newLang) {
     lang = newLang;
     localStorage.setItem("lang", newLang);
-    
+
     const currentCategoryId = getCurrentCategoryId();
-    
+
     // Check if we're on the menu page and have a category
     if (currentCategoryId && location.pathname.includes('menu.html')) {
         location.href = `menu.html?category=${currentCategoryId}&lang=${newLang}`;
@@ -135,7 +135,7 @@ function renderCategories(categories, container) {
         // Use pre-translated category names (from admin panel)
         const name = category[`name_${lang}`] || category.name_en || 'Unnamed Category';
         const imageUrl = category.img ? `${API_URL}${category.img}` : 'assets/images/placeholder.jpg';
-        
+
         container.innerHTML += `
             <div class="category" onclick="location.href='menu.html?category=${category.id}&lang=${lang}'">
                 <img src="${imageUrl}" alt="${name}" onerror="this.src='assets/images/placeholder.jpg'">
@@ -159,7 +159,7 @@ function renderItems(items, container) {
         const ingredients = item.ingredients || '';
         const price = item.price || systemMessages[lang].priceNotSet;
         const imageUrl = item.img ? `${API_URL}${item.img}` : 'assets/images/placeholder.jpg';
-        
+
         container.innerHTML += `
             <div class="item">
                 <img src="${imageUrl}" alt="${title}" onerror="this.src='assets/images/placeholder.jpg'">
@@ -176,7 +176,7 @@ function renderItems(items, container) {
 
 function renderNavCategories(categories, container) {
     if (!container) return;
-    
+
     container.innerHTML = '';
     categories.forEach(category => {
         // Use pre-translated category names (from admin panel)
@@ -209,7 +209,7 @@ const categoryId = getCurrentCategoryId();
 if (categoryId && document.getElementById("items")) {
     const container = document.getElementById("items");
     const titleElement = document.getElementById("category-title");
-    
+
     container.innerHTML = `<p>${systemMessages[lang].loading}</p>`;
     titleElement.textContent = systemMessages[lang].loading;
 
